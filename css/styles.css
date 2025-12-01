@@ -1,21 +1,487 @@
-/* styles.css */
-
-/* Global variables */
-
 :root {
-    
+  --black: #1b1b1b;
+  --cream: #FFFDD7;
+  --darkgreen: #5D9249;
+  --lightgreen: #B0DA6C;
+  --red: #CC0043;
 }
-
-/* Main styles */
 
 body {
-
+    overflow: hidden;
+    margin: 0;
 }
 
-h1 {
-
+.navbar {
+    position: fixed;
+    bottom: 2.5em;
+    left: 28%;
+    width: 42vw;           /* full width of viewport */
+    height: 50px;           /* adjust as needed */
+    padding: 0 20px;
+    background-color: rgba(255, 253, 215, 0.3);
+    border-radius: 30px; 
+    display: flex;
+    justify-content: center; /* center nav items horizontally */
+    align-items: center;     /* center nav items vertically */
+    z-index: 5;              /* above everything else */
 }
 
-p {
+/* Example nav items */
+.navbar a {
+    color: var(--cream);
+    text-decoration: none;
+    margin: 0 35px;
+    font-size: 25px;
+    font-family: "hey-eloise-watercolor", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    transition: all 0.3s ease;
+}
 
+.navbar a:hover {
+    color: var(--red);
+}
+
+.site-container {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+
+/* BACKGROUND LAYER (moves slower later for parallax) */
+.background-layer {
+    position: absolute;
+    top: 0;
+    left: 0;  /* Start from beginning to avoid gap */
+    width: 2000vw;  /* Much wider to cover all sections with parallax */
+    height: 100vh;
+    background-image: url('../assets/waterbackground.png');
+    background-repeat: repeat-x;
+    background-size: contain;  /* Maintains original appearance */
+    background-position: 0 center;  /* Center vertically */
+    z-index: -10;             
+    pointer-events: none;
+}
+
+/* MIDGROUND LAYER (moves at medium speed for parallax) */
+.midground-layer {
+    position: absolute;
+    top: 0;
+    left: 0;  /* Start from beginning to avoid gap */
+    width: 2000vw;  /* Match background width */
+    height: 100vh;
+    background-image: url('../assets/midground.png');
+    background-repeat: repeat-x;
+    background-size: contain;
+    background-position: 0 center;
+    z-index: -5;  /* Between background (-10) and sand (1) */
+    pointer-events: none;
+}
+
+/* BACKGROUND LAYER (moves slower later for parallax) */
+.sand-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height:100%;
+    width:100%; /* Adjust sand height */
+    background-image: url('../assets/sand.png');
+    background-repeat: repeat-x;
+    background-size: auto 45%;
+    background-position: bottom center;
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+/* Scroll container horizontal */
+.scroll-container {
+    display: flex;
+    height: 100vh;
+    width: max-content;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: auto;  /* Changed from smooth to auto for instant scrolling */
+    position: relative;
+    z-index: 1;    /* above background, below navbar */
+}
+
+
+#landing {
+    width: 110vw;
+    height: 100vh;
+    display: inline-block;
+    position: relative;
+    background-image: 
+    url('../assets/landing-background.png');
+    background-size: cover;
+    flex-shrink: 0;              /* prevent shrinking */
+}
+
+#landing::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('../assets/midground.png');
+    background-repeat: repeat-x;
+    background-size: contain;
+    background-position: var(--landing-midground-offset, 0) center;
+    pointer-events: none;
+    z-index: 0;  /* Between background and sand-coral */
+}
+
+#landing::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height:100%;
+    width:100%; /* Adjust sand height */
+    background-image: url('../assets/sand-coral.png');
+    background-repeat: repeat-x;
+    background-size: auto 45%;  /* Stretches to fit width */
+    background-position: var(--parallax-offset, 0) bottom;  /* Use CSS variable for parallax */
+    pointer-events: none;
+    z-index: 1;
+}
+
+  #landing-title {
+        position: absolute;
+        top: 37%;
+        left: 46%;
+        transform: translate(-50%, -50%);
+        color: var(--cream);
+        text-align: center;
+        font-size: 160px;
+        font-family: "hey-eloise-watercolor", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 0.85;
+        z-index: 2;  /* Above the sand overlay */
+
+    }
+
+#the-issue {
+    width: 160vw;
+    height: 100vh;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;              /* prevent shrinking */
+
+    #the-issue-title {
+        position: absolute;
+        top: 22%;
+        left: 8%;
+        transform: translate(-50%, -50%);
+        color: var(--cream);
+        text-align: center;
+        font-size: 150px;
+        font-family: "hey-eloise-watercolor", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 0.7;
+    }
+
+    #the-issue-text {
+        position: absolute;
+        top: 47%;
+        left: 8%;
+        transform: translateY(-50%);
+        color: var(--cream);
+        font-size: 24px;
+        font-family: "komet", sans-serif;
+        font-weight: 400;
+        font-style: light;
+        line-height: 1.4;
+        max-width: 750px;
+        z-index: 2;
+    }
+    #the-issue-text-2 {
+        position: absolute;
+        top: 61%;
+        left: 10%;
+        transform: translateY(-50%);
+        color: var(--cream);
+        font-size: 20px;
+        font-family: "komet", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 1.4;
+        max-width: 780px;
+        z-index: 2;
+    }
+
+    #what-is-bleaching-title {
+        position: absolute;
+        top: 20%;
+        left: 76%;           
+        transform: translateY(-50%);
+        font-family: "komet-sc", sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 114%;       /* ~51px */
+        text-align: center;
+        letter-spacing: -0.019em;
+        white-space: nowrap;
+        color: var(--cream);
+    }
+}
+
+#history {
+    width: 110vw;
+    height: 100vh;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;              /* prevent shrinking */
+
+     #history-title {
+        position: absolute;
+        top: 28%;
+        left: 40%;
+        transform: translate(-50%, -50%);
+        color: var(--cream);
+        text-align: center;
+        font-size: 150px;
+        font-family: "hey-eloise-watercolor", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+}
+
+#importance {
+    width: 110vw;
+    height: 100vh;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;              /* prevent shrinking */
+
+     #importance-title {
+        position: absolute;
+        top: 27%;
+        left: 40%;
+        transform: translate(-50%, -50%);
+        color: var(--cream);
+        text-align: center;
+        font-size: 150px;
+        font-family: "hey-eloise-watercolor", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+}
+
+#influence {
+    width: 110vw;
+    height: 100vh;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;              /* prevent shrinking */
+
+     #influence-title {
+        position: absolute;
+        top: 27%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--cream);
+        text-align: center;
+        font-size: 150px;
+        font-family: "hey-eloise-watercolor", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 0.7;
+    }
+}
+
+#communities-affected {
+    width: 110vw;
+    height: 100vh;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;              /* prevent shrinking */
+    
+     #communities-affected-title {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--cream);
+        text-align: center;
+        font-size: 150px;
+        font-family: "hey-eloise-watercolor", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 0.7;
+    }
+}
+
+#taking-action {
+    width: 110vw;
+    height: 100vh;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;              /* prevent shrinking */
+
+     #taking-action-title {
+        position: absolute;
+        top: 27%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--cream);
+        text-align: center;
+        font-size: 150px;
+        font-family: "hey-eloise-watercolor", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 0.7;
+    }
+}
+
+/* Sticky humuhumu fish image */
+.humuhumu-fish {
+    position: fixed;
+    bottom: 4em;
+    right: 4em;
+    width: 320px;  /* 1.5x navbar height (50px * 1.5 = 75px) */
+    height: auto;
+    z-index: 10;  /* Above navbar and content */
+    pointer-events: none;
+    /* Animation removed - handled in JavaScript */
+}
+
+#the-issue-text-2 strong,
+#the-issue-text-2 b {
+  font-weight: 600;
+}
+
+/* Coral before/after hover image */
+#the-issue .coral-slider {
+  position: absolute;
+  width: 540px;
+  height: 371px;
+  top: 40%;
+  left: 45%;
+  transform: translateY(-50%);
+  overflow: visible;       /* allow heading + captions outside box */
+  border-radius: 16px;
+  z-index: 2;
+
+  /* light, blurred drop shadow behind the image */
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Coral bleaching heading above the image */
+.coral-bleaching-heading {
+  position: absolute;
+  left: 50%;
+  bottom: 92%;             /* slightly above the slider box */
+  transform: translate(-50%, -8px); /* center horizontally + small gap */
+  font-family: "komet-sc", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 114%;       /* ~51px */
+  text-align: center;
+  letter-spacing: -0.019em;
+  white-space: nowrap;
+  color: var(--cream);
+}
+
+/* Base image style (applies to both before and after) */
+.coral-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Before image (bottom layer) */
+.coral-before {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* After image overlay (on top, hidden until hover) */
+.coral-after-overlay {
+  position: absolute;
+  inset: 0;                /* top:0; right:0; bottom:0; left:0; */
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;    /* hover still belongs to the slider as a whole */
+}
+
+.coral-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 16px;
+}
+
+/* On hover, fade in the after image over the before image */
+.coral-slider:hover .coral-after-overlay {
+  opacity: 1;
+}
+
+/* Captions under the image */
+.coral-caption {
+  position: absolute;
+  left: 50%;
+  top: 100%;               /* directly under the image box */
+  transform: translate(-50%, 8px);
+  font-family: "komet-sc", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  text-transform: lowercase;
+  letter-spacing: -0.019em;
+  text-align: center;
+  color: var(--cream);
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.coral-caption-before {
+  opacity: 1;
+}
+
+.coral-caption-after {
+  opacity: 0;
+}
+
+/* Swap captions on hover along with the images */
+.coral-slider:hover .coral-caption-before {
+  opacity: 0;
+}
+
+.coral-slider:hover .coral-caption-after {
+  opacity: 1;
+}
+
+/* Red coral decoration in the sand under the issue text */
+#the-issue .red-coral-decoration {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#the-issue .big-seaweed-decoration {
+  position: absolute;
+  top: 71%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  width: 260px;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
 }
