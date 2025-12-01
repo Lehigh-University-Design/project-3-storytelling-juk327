@@ -78,6 +78,8 @@ scrollContainer.addEventListener('scroll', () => {
   const redCoral = document.querySelector('.red-coral-decoration');
   const bigSeaweed = document.querySelector('.big-seaweed-decoration');
   const deadCoral = document.querySelector('.dead-coral-decoration');
+  const hawaiiFlag = document.querySelector('.hawaii-flag-container');
+  const blueCoral = document.querySelector('.blue-coral-container');
 
   if (redCoral) {
     redCoral.style.transform =
@@ -91,6 +93,18 @@ scrollContainer.addEventListener('scroll', () => {
 
   if (deadCoral) {
     deadCoral.style.transform =
+      `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
+  }
+
+  // Hawaii flag moves with the same parallax
+  if (hawaiiFlag) {
+    hawaiiFlag.style.transform =
+      `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
+  }
+
+  // Blue coral moves with the same parallax
+  if (blueCoral) {
+    blueCoral.style.transform =
       `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
   }
 });  
@@ -125,6 +139,43 @@ document.addEventListener('DOMContentLoaded', () => {
           inline: 'start'
         });
       }
+    });
+  });
+
+  const quizCards = document.querySelectorAll('.quiz-card');
+
+  quizCards.forEach(card => {
+    const correct = card.getAttribute('data-correct'); // "healthy" or "bleached"
+    const options = card.querySelectorAll('.quiz-option');
+    const backHeading = card.querySelector('.quiz-result-heading');
+    const backText = card.querySelector('.quiz-result-text');
+    const resetBtn = card.querySelector('.quiz-reset');
+
+    options.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const answer = btn.getAttribute('data-answer');
+
+        if (answer === correct) {
+          backHeading.textContent = 'correct!';
+          if (correct === 'healthy') {
+            backText.textContent =
+              'This reef has strong color and lots of life. Corals have a symbiotic relationship with microscopic algae called zooxanthellae that live in their tissues. These algae are the coral’s primary food source and give them their color.';
+          } else if (correct === 'bleached') {
+            backText.textContent =
+              'This reef has lost most of its color. Coral is left bleached and vulnerable. Without the algae, the coral loses its major source of food, turns white or very pale, and is more susceptible to disease.';
+          }
+        } else {
+          backHeading.textContent = 'not quite';
+          backText.textContent =
+            'Look closely at the colors and how much white you see, does it look healthy or bleached?';
+        }
+
+        card.classList.add('flipped');
+      });
+    });
+
+    resetBtn.addEventListener('click', () => {
+      card.classList.remove('flipped');
     });
   });
 });

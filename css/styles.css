@@ -16,7 +16,7 @@ body {
     bottom: 2.5em;
     left: 28%;
     width: 42vw;           /* full width of viewport */
-    height: 50px;           /* adjust as needed */
+    height: 30px;           /* adjust as needed */
     padding: 0 15px;
     background-color: rgba(255, 253, 215, 0.3);
     border-radius: 30px; 
@@ -166,7 +166,7 @@ body {
     }
 
 #the-issue {
-    width: 200vw;
+    width: 210vw;
     height: 100vh;
     display: inline-block;
     position: relative;
@@ -175,11 +175,11 @@ body {
     #the-issue-title {
         position: absolute;
         top: 22%;
-        left: 6%;
+        left: 7%;
         transform: translate(-50%, -50%);
         color: var(--cream);
         text-align: center;
-        font-size: 150px;
+        font-size: 160px;
         font-family: "hey-eloise-watercolor", sans-serif;
         font-weight: 400;
         font-style: normal;
@@ -197,7 +197,7 @@ body {
         font-weight: 400;
         font-style: light;
         line-height: 1.4;
-        max-width: 750px;
+        max-width: 740px;
         z-index: 2;
     }
     #the-issue-text-2 {
@@ -211,19 +211,19 @@ body {
         font-weight: 400;
         font-style: normal;
         line-height: 1.4;
-        max-width: 780px;
+        max-width: 760px;
         z-index: 2;
     }
 
     #what-is-bleaching-title {
         position: absolute;
         top: 26%;
-        left: 57%;           
+        left: 56%;           
         transform: translateY(-50%);
         font-family: "komet-sc", sans-serif;
         font-style: normal;
         font-weight: 700;
-        font-size: 40px;
+        font-size: 36px;
         line-height: 114%;       /* ~51px */
         text-align: center;
         letter-spacing: -0.019em;
@@ -233,7 +233,7 @@ body {
     #what-is-bleaching {
         position: absolute;
         top: 42%;
-        left: 58%;
+        left: 57%;
         transform: translateY(-50%);
         color: var(--cream);
         font-size: 24px;
@@ -271,7 +271,7 @@ body {
 #the-issue .dead-coral-decoration {
   position: absolute;
   top: 70%;            
-  left: 98%;        
+  left: 91%;        
   transform: translate(-50%, -50%);
   width: 220px;
   height: auto;
@@ -293,12 +293,15 @@ body {
   top: 40%;
   left: 35%;
   transform: translateY(-50%);
-  overflow: visible;       /* allow heading + captions outside box */
+  overflow: visible;
   border-radius: 16px;
   z-index: 2;
-
-  /* light, blurred drop shadow behind the image */
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Custom cursor when hovering over the before/after image */
+#the-issue .coral-slider:hover {
+  cursor: url('../assets/sun.png') 16 16, pointer;
 }
 
 /* Coral bleaching heading above the image */
@@ -391,10 +394,130 @@ body {
   opacity: 1;
 }
 
+.bleaching-quiz {
+  position: absolute;
+  top: 42%;              /* align roughly with the blurb’s center */
+  left: 83%;             /* move to the right side of the blurb */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column; /* stack cards vertically */
+  gap: 22px;              /* space between cards */
+  z-index: 2;
+}
+
+.quiz-card {
+  width: 320px;
+  height: 260px;
+  perspective: 1000px;
+}
+
+.quiz-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.quiz-card.flipped .quiz-card-inner {
+  transform: rotateY(180deg);
+}
+
+.quiz-card-front,
+.quiz-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 12px;
+}
+
+.quiz-card-front {
+  color: var(--cream);
+}
+
+.quiz-card-back {
+  transform: rotateY(180deg);
+  background: rgba(255, 253, 215, 0.96);
+  color: var(--black);
+}
+
+.quiz-card-img {
+  width: 100%;
+  height: 170px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.quiz-question {
+  font-family: "komet-sc", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.quiz-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.quiz-option {
+  background: var(--cream);
+  border: none;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-family: "komet", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--black);
+}
+
+.quiz-option:hover {
+  background: var(--red);
+  color: var(--cream);
+}
+
+.quiz-result-heading {
+  font-family: "komet-sc", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 30px 0 8px;
+  text-align: center;
+}
+
+.quiz-result-text {
+  font-family: "komet", sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: center;
+  margin: 0;
+}
+
+.quiz-reset {
+  margin-top: auto;
+  background: transparent;
+  border: 1px solid var(--black);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-family: "komet", sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+}
+
 
 
 #history {
-    width: 230vw;
+    width: 250vw;
     height: 100vh;
     display: inline-block;
     position: relative;
@@ -402,12 +525,12 @@ body {
 
      #history-title {
         position: absolute;
-        top: 17%;
-        left: 10%;
+        top: 20%;
+        left: 7%;
         transform: translate(-50%, -50%);
         color: var(--cream);
         text-align: center;
-        font-size: 160px;
+        font-size: 180px;
         font-family: "hey-eloise-watercolor", sans-serif;
         font-weight: 400;
         font-style: normal;
@@ -424,90 +547,157 @@ body {
 .history-item {
   position: absolute;
   display: grid;
-  grid-template-columns: auto 1fr;  /* left: image+year, right: text */
-  grid-auto-rows: auto;
-  column-gap: 16px;
+  grid-template-columns: auto 1fr;  /* col 1 auto = image width, col 2 text */
+  grid-template-rows: auto auto;
+  column-gap: 17px;                 /* margin between image and text */
+  row-gap: 2px;
   align-items: flex-start;
-  max-width: 700px;
+  max-width: 670px;
   color: var(--cream);
   font-family: "komet", sans-serif;
 }
 
-.history-text {
-    display: contents;
-}
-
 .history-img {
-  grid-row: 1 / 2;
+  grid-row: 1;
   grid-column: 1;
-  width: 216px;
-  height: 157px;
+  width: 230px;
+  height: 150px;                  /* fixed height for consistent aspect ratio */
   border-radius: 16px;
-  object-fit: cover;
+  object-fit: cover;              /* crops to fill, maintains aspect ratio */
   display: block;
+  transition: width 0.25s ease;
 }
 
-/* Year: under the photo, left-aligned */
+/* On hover, image gets wider; text moves right, keeping the same 17px gap */
+.history-item:hover .history-img {
+  width: 290px;                   /* wider */
+  height: 200px;                  /* maintain same aspect ratio (230/150 = 260/170 ≈ 1.53) */
+}
+
+/* Year below image stays the same */
 .history-text h3 {
-  grid-row: 2;
-  grid-column: 1;
-  margin: 6px 0 0;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 2px);
+  margin: 0;
   font-size: 38px;
   font-weight: 700;
   font-family: "komet-sc", sans-serif;
   letter-spacing: -0.02em;
   text-align: left;
+  width: 260px;                     /* bump to match hover width (optional but neat) */
 }
 
-/* Description: to the right, spanning image + year vertically */
-.history-text p {
-  grid-row: 1 / 3;   /* span rows with image and year */
+/* Text column stays in col 2; grid handles its left offset */
+.history-text {
+  grid-row: 1;
   grid-column: 2;
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.4;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
 }
 
 .history-item-1 {
-  top: 45%;    
-  left: 6%;
+  top: 40%;    
+  left: 3%;
 }
 
 .history-item-2 {
-  top: 13%;   
-  left: 18%;
+  top: 12%;   
+  left: 14%;
 }
 
 .history-item-3 {
-  top: 45%;   
-  left: 30%;
+  top: 40%;   
+  left: 25%;
 }
 
 .history-item-4 {
-  top: 13%;     
-  left: 42%;
+  top: 12%;     
+  left: 36%;
 }
 
 .history-item-5 {
-  top: 45%;    
-  left: 55%;
+  top: 40%;    
+  left: 47%;
 }
 
 .history-item-6 {
-  top: 13%;    
-  left: 69%;
+  top: 12%;    
+  left: 58%;
 }
 
 .history-item-7 {
-  top: 45%;   
-  left: 83%;
+  top: 40%;   
+  left: 69%;
 }
 
 .history-item-8 {
-  top: 13%;   
-  left: 98%;
+  top: 12%;   
+  left: 80%;
 }
 
+/* Hawaii flag container */
+#history .hawaii-flag-container {
+  position: absolute;
+  top: 82%;
+  left: 39%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Flag label - hidden by default, shown on hover */
+#history .hawaii-flag-label {
+  position: absolute;
+  bottom: 100%;              /* above the flag */
+  left: 53%;
+  transform: translateX(-50%) rotate(8deg);  /* add the same tilt */
+  margin: 0 0 9px 0;         /* small gap above flag */
+  font-family: "komet-sc", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cream);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+/* Show label on hover */
+#history .hawaii-flag-container:hover .hawaii-flag-label {
+  opacity: 1;
+}
+
+/* Hawaii flag decoration */
+#history .hawaii-flag-decoration {
+  position: relative;        /* change from absolute since container handles positioning */
+  transform: rotate(8deg);
+  width: 230px;
+  height: auto;
+  pointer-events: none;
+  display: block;
+}
+
+/* Blue coral container under history title */
+#history .blue-coral-container {
+  position: absolute;
+  top: 80%;
+  left: 17%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Blue coral decoration */
+#history .blue-coral-decoration {
+  position: relative;
+  transform: none;
+  width: 180px;
+  height: auto;
+  pointer-events: none;
+  display: block;
+}
 
 
 #importance {
@@ -587,4 +777,3 @@ body {
     pointer-events: none;
     /* Animation removed - handled in JavaScript */
 }
-
