@@ -166,7 +166,7 @@ body {
     }
 
 #the-issue {
-    width: 160vw;
+    width: 180vw;
     height: 100vh;
     display: inline-block;
     position: relative;
@@ -175,7 +175,7 @@ body {
     #the-issue-title {
         position: absolute;
         top: 22%;
-        left: 8%;
+        left: 7%;
         transform: translate(-50%, -50%);
         color: var(--cream);
         text-align: center;
@@ -189,7 +189,7 @@ body {
     #the-issue-text {
         position: absolute;
         top: 47%;
-        left: 8%;
+        left: 6%;
         transform: translateY(-50%);
         color: var(--cream);
         font-size: 24px;
@@ -203,7 +203,7 @@ body {
     #the-issue-text-2 {
         position: absolute;
         top: 61%;
-        left: 10%;
+        left: 8%;
         transform: translateY(-50%);
         color: var(--cream);
         font-size: 20px;
@@ -217,8 +217,8 @@ body {
 
     #what-is-bleaching-title {
         position: absolute;
-        top: 20%;
-        left: 76%;           
+        top: 26%;
+        left: 64%;           
         transform: translateY(-50%);
         font-family: "komet-sc", sans-serif;
         font-style: normal;
@@ -230,7 +230,169 @@ body {
         white-space: nowrap;
         color: var(--cream);
     }
+    #what-is-bleaching {
+        position: absolute;
+        top: 42%;
+        left: 65%;
+        transform: translateY(-50%);
+        color: var(--cream);
+        font-size: 24px;
+        font-family: "komet", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 1.4;
+        max-width: 740px;
+        z-index: 2;
+    }
 }
+/* Red coral decoration in the sand under the issue text */
+#the-issue .red-coral-decoration {
+  position: absolute;
+  top: 80%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#the-issue .big-seaweed-decoration {
+  position: absolute;
+  top: 71%;
+  left: 78%;
+  transform: translate(-50%, -50%);
+  width: 260px;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#the-issue .dead-coral-decoration {
+  position: absolute;
+  top: 70%;            
+  left: 92%;        
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+}
+
+
+#the-issue-text-2 strong,
+#the-issue-text-2 b {
+  font-weight: 600;
+}
+
+/* Coral before/after hover image */
+#the-issue .coral-slider {
+  position: absolute;
+  width: 540px;
+  height: 371px;
+  top: 40%;
+  left: 40%;
+  transform: translateY(-50%);
+  overflow: visible;       /* allow heading + captions outside box */
+  border-radius: 16px;
+  z-index: 2;
+
+  /* light, blurred drop shadow behind the image */
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Coral bleaching heading above the image */
+.coral-bleaching-heading {
+  position: absolute;
+  left: 50%;
+  bottom: 92%;             /* slightly above the slider box */
+  transform: translate(-50%, -8px); /* center horizontally + small gap */
+  font-family: "komet-sc", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 114%;       /* ~51px */
+  text-align: center;
+  letter-spacing: -0.019em;
+  white-space: nowrap;
+  color: var(--cream);
+}
+
+/* Base image style (applies to both before and after) */
+.coral-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Before image (bottom layer) */
+.coral-before {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* After image overlay (on top, hidden until hover) */
+.coral-after-overlay {
+  position: absolute;
+  inset: 0;                /* top:0; right:0; bottom:0; left:0; */
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;    /* hover still belongs to the slider as a whole */
+}
+
+.coral-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 16px;
+}
+
+/* On hover, fade in the after image over the before image */
+.coral-slider:hover .coral-after-overlay {
+  opacity: 1;
+}
+
+/* Captions under the image */
+.coral-caption {
+  position: absolute;
+  left: 50%;
+  top: 100%;               /* directly under the image box */
+  transform: translate(-50%, 8px);
+  font-family: "komet-sc", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  text-transform: lowercase;
+  letter-spacing: -0.019em;
+  text-align: center;
+  color: var(--cream);
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.coral-caption-before {
+  opacity: 1;
+}
+
+.coral-caption-after {
+  opacity: 0;
+}
+
+/* Swap captions on hover along with the images */
+.coral-slider:hover .coral-caption-before {
+  opacity: 0;
+}
+
+.coral-slider:hover .coral-caption-after {
+  opacity: 1;
+}
+
+
+
 
 #history {
     width: 110vw;
@@ -241,8 +403,8 @@ body {
 
      #history-title {
         position: absolute;
-        top: 28%;
-        left: 40%;
+        top: 20%;
+        left: 20%;
         transform: translate(-50%, -50%);
         color: var(--cream);
         text-align: center;
@@ -252,6 +414,87 @@ body {
         font-style: normal;
     }
 }
+
+/* History timeline */
+.history-timeline {
+  position: relative;
+  width: 100%;
+  height: 100%;       /* fills the history section */
+}
+
+.history-item {
+  position: absolute;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  max-width: 340px;
+  color: var(--cream);
+  font-family: "komet", sans-serif;
+}
+
+.history-img {
+  width: 216px;
+
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.history-text h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "komet-sc", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.history-text p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Zig-zag positions around the History title */
+.history-item-1 {
+  top: 45%;    /* was 55% */
+  left: 25%;
+}
+
+.history-item-2 {
+  top: 20%;    /* was 30% */
+  left: 60%;
+}
+
+.history-item-3 {
+  top: 60%;    /* was 70% */
+  left: 15%;
+}
+
+.history-item-4 {
+  top: 30%;    /* was 40% */
+  left: 70%;
+}
+
+.history-item-5 {
+  top: 70%;    /* was 80% */
+  left: 25%;
+}
+
+.history-item-6 {
+  top: 40%;    /* was 50% */
+  left: 75%;
+}
+
+.history-item-7 {
+  top: 55%;    /* was 65% */
+  left: 35%;
+}
+
+.history-item-8 {
+  top: 25%;    /* was 35% */
+  left: 80%;
+}
+
+
 
 #importance {
     width: 110vw;
@@ -352,136 +595,3 @@ body {
     /* Animation removed - handled in JavaScript */
 }
 
-#the-issue-text-2 strong,
-#the-issue-text-2 b {
-  font-weight: 600;
-}
-
-/* Coral before/after hover image */
-#the-issue .coral-slider {
-  position: absolute;
-  width: 540px;
-  height: 371px;
-  top: 40%;
-  left: 45%;
-  transform: translateY(-50%);
-  overflow: visible;       /* allow heading + captions outside box */
-  border-radius: 16px;
-  z-index: 2;
-
-  /* light, blurred drop shadow behind the image */
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-}
-
-/* Coral bleaching heading above the image */
-.coral-bleaching-heading {
-  position: absolute;
-  left: 50%;
-  bottom: 92%;             /* slightly above the slider box */
-  transform: translate(-50%, -8px); /* center horizontally + small gap */
-  font-family: "komet-sc", sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 114%;       /* ~51px */
-  text-align: center;
-  letter-spacing: -0.019em;
-  white-space: nowrap;
-  color: var(--cream);
-}
-
-/* Base image style (applies to both before and after) */
-.coral-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 16px;
-}
-
-/* Before image (bottom layer) */
-.coral-before {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/* After image overlay (on top, hidden until hover) */
-.coral-after-overlay {
-  position: absolute;
-  inset: 0;                /* top:0; right:0; bottom:0; left:0; */
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  pointer-events: none;    /* hover still belongs to the slider as a whole */
-}
-
-.coral-after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 16px;
-}
-
-/* On hover, fade in the after image over the before image */
-.coral-slider:hover .coral-after-overlay {
-  opacity: 1;
-}
-
-/* Captions under the image */
-.coral-caption {
-  position: absolute;
-  left: 50%;
-  top: 100%;               /* directly under the image box */
-  transform: translate(-50%, 8px);
-  font-family: "komet-sc", sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 1.2;
-  text-transform: lowercase;
-  letter-spacing: -0.019em;
-  text-align: center;
-  color: var(--cream);
-  pointer-events: none;
-  transition: opacity 0.25s ease;
-}
-
-.coral-caption-before {
-  opacity: 1;
-}
-
-.coral-caption-after {
-  opacity: 0;
-}
-
-/* Swap captions on hover along with the images */
-.coral-slider:hover .coral-caption-before {
-  opacity: 0;
-}
-
-.coral-slider:hover .coral-caption-after {
-  opacity: 1;
-}
-
-/* Red coral decoration in the sand under the issue text */
-#the-issue .red-coral-decoration {
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 220px;
-  height: auto;
-  pointer-events: none;
-  z-index: 2;
-}
-
-#the-issue .big-seaweed-decoration {
-  position: absolute;
-  top: 71%;
-  left: 80%;
-  transform: translate(-50%, -50%);
-  width: 260px;
-  height: auto;
-  pointer-events: none;
-  z-index: 2;
-}

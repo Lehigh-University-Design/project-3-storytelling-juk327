@@ -77,6 +77,7 @@ scrollContainer.addEventListener('scroll', () => {
   // Red coral + big seaweed move with the sand parallax
   const redCoral = document.querySelector('.red-coral-decoration');
   const bigSeaweed = document.querySelector('.big-seaweed-decoration');
+  const deadCoral = document.querySelector('.dead-coral-decoration');
 
   if (redCoral) {
     redCoral.style.transform =
@@ -87,7 +88,21 @@ scrollContainer.addEventListener('scroll', () => {
     bigSeaweed.style.transform =
       `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
   }
+
+  if (deadCoral) {
+    deadCoral.style.transform =
+      `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
+  }
 });
+
+
+  // Dead coral popover
+  const deadCoralTrigger = document.querySelector('.dead-coral-trigger');
+  if (deadCoralTrigger) {
+    deadCoralTrigger.addEventListener('click', () => {
+      deadCoralTrigger.classList.toggle('active');
+    });
+  }
 
 // Convert vertical scroll (2-finger scroll) to horizontal scroll
 scrollContainer.addEventListener('wheel', (e) => {
