@@ -93,16 +93,8 @@ scrollContainer.addEventListener('scroll', () => {
     deadCoral.style.transform =
       `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
   }
-});
+});  
 
-
-  // Dead coral popover
-  const deadCoralTrigger = document.querySelector('.dead-coral-trigger');
-  if (deadCoralTrigger) {
-    deadCoralTrigger.addEventListener('click', () => {
-      deadCoralTrigger.classList.toggle('active');
-    });
-  }
 
 // Convert vertical scroll (2-finger scroll) to horizontal scroll
 scrollContainer.addEventListener('wheel', (e) => {

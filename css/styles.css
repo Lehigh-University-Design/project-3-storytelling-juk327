@@ -166,7 +166,7 @@ body {
     }
 
 #the-issue {
-    width: 180vw;
+    width: 200vw;
     height: 100vh;
     display: inline-block;
     position: relative;
@@ -175,7 +175,7 @@ body {
     #the-issue-title {
         position: absolute;
         top: 22%;
-        left: 7%;
+        left: 6%;
         transform: translate(-50%, -50%);
         color: var(--cream);
         text-align: center;
@@ -203,7 +203,7 @@ body {
     #the-issue-text-2 {
         position: absolute;
         top: 61%;
-        left: 8%;
+        left: 7%;
         transform: translateY(-50%);
         color: var(--cream);
         font-size: 20px;
@@ -218,7 +218,7 @@ body {
     #what-is-bleaching-title {
         position: absolute;
         top: 26%;
-        left: 64%;           
+        left: 57%;           
         transform: translateY(-50%);
         font-family: "komet-sc", sans-serif;
         font-style: normal;
@@ -233,7 +233,7 @@ body {
     #what-is-bleaching {
         position: absolute;
         top: 42%;
-        left: 65%;
+        left: 58%;
         transform: translateY(-50%);
         color: var(--cream);
         font-size: 24px;
@@ -241,7 +241,7 @@ body {
         font-weight: 400;
         font-style: normal;
         line-height: 1.4;
-        max-width: 740px;
+        max-width: 670px;
         z-index: 2;
     }
 }
@@ -249,7 +249,7 @@ body {
 #the-issue .red-coral-decoration {
   position: absolute;
   top: 80%;
-  left: 48%;
+  left: 39%;
   transform: translate(-50%, -50%);
   width: 220px;
   height: auto;
@@ -260,7 +260,7 @@ body {
 #the-issue .big-seaweed-decoration {
   position: absolute;
   top: 71%;
-  left: 78%;
+  left: 62%;
   transform: translate(-50%, -50%);
   width: 260px;
   height: auto;
@@ -271,7 +271,7 @@ body {
 #the-issue .dead-coral-decoration {
   position: absolute;
   top: 70%;            
-  left: 107%;        
+  left: 98%;        
   transform: translate(-50%, -50%);
   width: 220px;
   height: auto;
@@ -291,7 +291,7 @@ body {
   width: 540px;
   height: 371px;
   top: 40%;
-  left: 40%;
+  left: 35%;
   transform: translateY(-50%);
   overflow: visible;       /* allow heading + captions outside box */
   border-radius: 16px;
@@ -394,7 +394,7 @@ body {
 
 
 #history {
-    width: 220vw;
+    width: 230vw;
     height: 100vh;
     display: inline-block;
     position: relative;
@@ -480,32 +480,32 @@ body {
 
 .history-item-3 {
   top: 45%;   
-  left: 15%;
+  left: 30%;
 }
 
 .history-item-4 {
   top: 13%;     
-  left: 70%;
+  left: 42%;
 }
 
 .history-item-5 {
   top: 45%;    
-  left: 25%;
+  left: 55%;
 }
 
 .history-item-6 {
   top: 13%;    
-  left: 75%;
+  left: 69%;
 }
 
 .history-item-7 {
   top: 45%;   
-  left: 35%;
+  left: 83%;
 }
 
 .history-item-8 {
   top: 13%;   
-  left: 80%;
+  left: 98%;
 }
 
 
