@@ -2,9 +2,11 @@
 // Get elements
 const scrollContainer = document.querySelector('.scroll-container');
 const backgroundLayer = document.querySelector('.background-layer');
+
 const midgroundLayer = document.querySelector('.midground-layer');
 const sandLayer = document.querySelector('.sand-layer');
 const landingSection = document.getElementById('landing');
+
 const humuhumuFish = document.getElementById('humuhumu-fish');
 
 // Swimming animation for fish
@@ -28,6 +30,7 @@ updateSwimAnimation();
 // Parallax effect on horizontal scroll - starts from landing section
 scrollContainer.addEventListener('scroll', () => {
   const scrollLeft = scrollContainer.scrollLeft;
+
   
   // Apply parallax to repeating background from the beginning
   // Water background moves slower (0.7 speed)
@@ -50,7 +53,10 @@ scrollContainer.addEventListener('scroll', () => {
   }
   
   // Move humuhumu fish from right to left at same pace as scroll from the start
-  if (humuhumuFish) {
+  const humuhumuContainer = document.querySelector('.humuhumu-container');
+  const historySection = document.getElementById('history');
+  
+  if (humuhumuContainer) {
     const viewportWidth = window.innerWidth;
     const fishWidth = 300; // Match CSS width (300px)
     const rightSpacing = 48; // 3em = 48px (assuming 16px base)
@@ -68,18 +74,32 @@ scrollContainer.addEventListener('scroll', () => {
     
     // Get current vertical movement from swimming animation
     const verticalMovement = Math.sin(swimOffset) * 10;
-    // Apply both transforms - negative because we're moving left
-    humuhumuFish.style.transform = `translateX(${-fishPosition}px) translateY(${verticalMovement}px)`;
-
     
+    // Check if scroll position is within history section
+    let scale = 1; // Normal size
+    if (historySection) {
+      const historyLeft = historySection.offsetLeft;
+      const historyRight = historyLeft + historySection.offsetWidth;
+      
+      // Check if current scroll position is within history section
+      if (scrollLeft >= historyLeft - viewportWidth && scrollLeft <= historyRight) {
+        scale = 0.85; // Slightly smaller (85% of original size)
+      }
+    }
+    
+    // Apply transform to the container so hover area moves with the fish
+    humuhumuContainer.style.transform = `translateX(${-fishPosition}px) translateY(${verticalMovement}px) scale(${scale})`;
+    humuhumuContainer.style.transformOrigin = 'bottom right'; // Scale from bottom right corner
   }
 
   // Red coral + big seaweed move with the sand parallax
   const redCoral = document.querySelector('.red-coral-decoration');
   const bigSeaweed = document.querySelector('.big-seaweed-decoration');
-  const deadCoral = document.querySelector('.dead-coral-decoration');
-  const hawaiiFlag = document.querySelector('.hawaii-flag-container');
+  const deadCoral = document.querySelector('.dead-coral-issue-container');  // Changed to container
   const blueCoral = document.querySelector('.blue-coral-container');
+  const redCoralHistory = document.querySelector('.red-coral-history-container');
+  const deadCoralHistory = document.querySelector('.dead-coral-history-container');
+  const hawaiiFlag = document.querySelector('.hawaii-flag-container');
 
   if (redCoral) {
     redCoral.style.transform =
@@ -96,16 +116,40 @@ scrollContainer.addEventListener('scroll', () => {
       `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
   }
 
+  // Blue coral in history section moves with the same parallax
+  if (blueCoral) {
+    blueCoral.style.transform =
+      `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
+  }
+
+  // Red coral in history section moves with the same parallax
+  if (redCoralHistory) {
+    redCoralHistory.style.transform =
+      `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
+  }
+
   // Hawaii flag moves with the same parallax
   if (hawaiiFlag) {
     hawaiiFlag.style.transform =
       `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
   }
 
-  // Blue coral moves with the same parallax
-  if (blueCoral) {
-    blueCoral.style.transform =
-      `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
+  // Trigger turtle glide-in when importance section comes into view
+  const importanceSection = document.getElementById('importance');
+  const turtle = document.querySelector('.importance-turtle');
+  let turtleAnimated = false;
+
+  if (!turtleAnimated && importanceSection && turtle) {
+    const importanceLeft = importanceSection.offsetLeft;
+    const importanceRight = importanceLeft + importanceSection.offsetWidth;
+
+    const viewportLeft = scrollLeft;
+    const viewportRight = scrollLeft + window.innerWidth;
+
+    if (viewportRight > importanceLeft && viewportLeft < importanceRight) {
+      turtle.classList.add('visible');  // runs turtleGlideIn animation
+      turtleAnimated = true;            // only once
+    }
   }
 });  
 
@@ -178,4 +222,48 @@ document.addEventListener('DOMContentLoaded', () => {
       card.classList.remove('flipped');
     });
   });
+
+  // Turtle glide-in when importance section comes into view
+  const turtle = document.querySelector('.importance-turtle');
+  const scrollRoot = document.querySelector('.scroll-container');
+
+  if (turtle && scrollRoot && 'IntersectionObserver' in window) {
+    const turtleObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            turtle.classList.add('visible'); // triggers CSS animation
+            obs.unobserve(turtle);           // run only once
+          }
+        });
+      },
+      {
+        root: scrollRoot,   // horizontal scroll container
+        threshold: 0.3
+      }
+    );
+
+    turtleObserver.observe(turtle);
+  }
+
+  // Click to swap green sea turtle image and toggle hover text
+  const turtleContainer = document.querySelector('.importance-turtle-container');
+  const turtleImg = document.querySelector('.importance-turtle');
+
+  if (turtleContainer && turtleImg) {
+    const originalSrc = 'assets/green-sea-turtle.png';
+    const realSrc = 'assets/green-sea-turtle-real.png';
+
+    turtleContainer.addEventListener('click', () => {
+      if (turtleImg.src.includes('green-sea-turtle-real.png')) {
+        // Back to illustration, re‑enable hover label
+        turtleImg.src = originalSrc;
+        turtleContainer.classList.remove('turtle-clicked');
+      } else {
+        // Show real photo, disable hover label
+        turtleImg.src = realSrc;
+        turtleContainer.classList.add('turtle-clicked');
+      }
+    });
+  }
 });
