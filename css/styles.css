@@ -54,7 +54,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;  /* Start from beginning to avoid gap */
-    width: 2000vw;  /* Much wider to cover all sections with parallax */
+    width: 2500vw;  /* Much wider to cover all sections with parallax */
     height: 100vh;
     background-image: url('../assets/waterbackground.png');
     background-repeat: repeat-x;
@@ -69,7 +69,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;  /* Start from beginning to avoid gap */
-    width: 2000vw;  /* Match background width */
+    width: 2500vw;  /* Match background width */
     height: 100vh;
     background-image: url('../assets/midground.png');
     background-repeat: repeat-x;
@@ -85,7 +85,7 @@ body {
     bottom: 0;
     left: 0;
     height:100%;
-    width:100%; /* Adjust sand height */
+    width:2500vw; /* Adjust sand height */
     background-image: url('../assets/sand.png');
     background-repeat: repeat-x;
     background-size: auto 45%;
@@ -255,7 +255,7 @@ body {
   height: auto;
   pointer-events: none;
   z-index: 2;
-}
+    }
 
 #the-issue .big-seaweed-decoration {
   position: absolute;
@@ -771,7 +771,7 @@ body {
 
 
 #importance {
-    width: 160vw;
+    width: 250vw;
     height: 100vh;
     display: inline-block;
     position: relative;
@@ -780,7 +780,7 @@ body {
      #importance-title {
         position: absolute;
         top: 24%;
-        left: 15%;
+        left: 9%;
         transform: translate(-50%, -50%);
         color: var(--cream);
         text-align: left;
@@ -802,7 +802,7 @@ body {
 #importance-text {
   position: absolute;
   top: 44%;              /* adjust vertical position as needed */
-  left: 5%;            
+  left: 3%;            
   transform: none;       /* no centering shift */
   color: var(--cream);
   font-size: 24px;
@@ -812,12 +812,34 @@ body {
   line-height: 1.4;
   max-width: 500px;
   text-align: left;
+    }
+
+#importance .importance-small-seaweed {
+  position: absolute;
+  top: 78%;         /* tweak to sit just under the title */
+  left: 40%;        /* align roughly under the left edge of the title */
+  transform: translate(-50%, -50%);
+  max-width: 180px;     
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#importance .importance-big-seaweed {
+  position: absolute;
+  top: 74%;          /* tweak to sit under hawksbill */
+  left: 81%;         /* align under the hawksbill container at ~62–77% */
+  transform: translate(-50%, -50%);
+  width: 260px;      /* similar to original big seaweed */
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .importance-turtle-container {
   position: absolute;
   top: 15%;
-  left: 30%;
+  left: 19%;
   width: 400px;       /* matches turtle width */
   height: auto;
   pointer-events: auto;
@@ -830,6 +852,7 @@ body {
   height: auto;
   object-fit: contain;
   pointer-events: none;
+  border-radius: 24px;   /* rounded edges */
 
   opacity: 0;
   transform: translate(-150%, -150%);
@@ -873,10 +896,37 @@ body {
   opacity: 1;
 }
 
+.importance-turtle-caption {
+  position: absolute;
+  top: 100%;               /* directly under the image */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  width: 420px;
+  color: var(--cream);
+  font-family: "komet", sans-serif;
+  font-size: 16px;
+  line-height: 1.3;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Show caption only when real image is active */
+.importance-turtle-container.turtle-clicked .importance-turtle-caption {
+  opacity: 1;
+}
+
+.importance-turtle-container.turtle-clicked {
+  top: 22%;
+}
+
 .importance-monk-seal-container {
   position: absolute;
   top: 18%;
-  left: 52%;
+  left: 32%;
   width: 450px;
   pointer-events: auto;
   z-index: 2;
@@ -887,9 +937,10 @@ body {
   height: auto;
   object-fit: contain;
   pointer-events: none;
+  border-radius: 24px;   /* rounded edges */
 }
 
-/* Label directly underneath */
+/* Label directly underneath (same style as before) */
 .importance-monk-seal-label {
   position: absolute;
   top: 100%;
@@ -907,15 +958,57 @@ body {
   z-index: 3;
 }
 
-.importance-monk-seal-container:hover .importance-monk-seal-label {
+/* Show label only when not clicked (illustration state) */
+.importance-monk-seal-container:not(.monk-clicked):hover .importance-monk-seal-label {
   opacity: 1;
+}
+
+/* Caption under monk seal, only for real image */
+.importance-monk-caption {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  width: 400px;
+  color: var(--cream);
+  font-family: "komet", sans-serif;
+  font-size: 16px;
+  line-height: 1.3;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.importance-monk-seal-container.monk-clicked .importance-monk-caption {
+  opacity: 1;
+}
+
+.importance-monk-seal-container.monk-clicked {
+  top: 22%;  /* adjust vertical position when clicked */
+}
+
+.importance-monk-heading {
+  position: absolute;
+  top: 5%;        /* tweak vertically as needed */
+  left: 37%;       /* align roughly over the monk seal (same left as container) */
+  transform: translateX(-50%);
+  max-width: 600px;
+  color: var(--cream);
+  font-family: "komet", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
 }
 
 .importance-hawksbill-container {
   position: absolute;
-  top: 21%;      /* match monk seal vertical alignment */
-  left: 77%;     /* to the right of the monk seal at 52% */
-  width: 280px;  /* size; tweak as needed */
+  top: 21%;      /* your current values */
+  left: 47%;
+  width: 280px;
   pointer-events: auto;
   z-index: 2;
 }
@@ -925,13 +1018,14 @@ body {
   height: auto;
   object-fit: contain;
   pointer-events: none;
+  border-radius: 24px;   /* rounded edges */
 }
 
-/* Hover label under the hawksbill */
+/* Hover label only when not clicked (illustration state) */
 .importance-hawksbill-label {
   position: absolute;
-  top: 7%;           /* above the shell */
-  left: -20px;          /* top-left corner */
+  top: 7%;
+  left: -20px;
   transform: rotate(-20deg);
   transform-origin: left bottom;
   font-family: "komet-sc", sans-serif;
@@ -945,23 +1039,201 @@ body {
   z-index: 3;
 }
 
-.importance-hawksbill-container:hover .importance-hawksbill-label {
+.importance-hawksbill-container:not(.hawksbill-clicked):hover .importance-hawksbill-label {
   opacity: 1;
 }
 
-.importance-monk-heading {
+/* Caption under hawksbill, only when real image is active */
+.importance-hawksbill-caption {
   position: absolute;
-  top: 5%;        /* tweak vertically as needed */
-  left: 60%;       /* align roughly over the monk seal (same left as container) */
+  top: 100%;
+  left: 50%;
   transform: translateX(-50%);
-  max-width: 600px;
+  margin-top: 10px;
+  width: 400px;   /* adjust width as needed */
   color: var(--cream);
   font-family: "komet", sans-serif;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.3;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.importance-hawksbill-container.hawksbill-clicked .importance-hawksbill-caption {
+  opacity: 1;
+}
+
+/* Optional: lower the real hawksbill when clicked */
+.importance-hawksbill-container.hawksbill-clicked {
+  top: 22%;   /* increase to move further down */
+  width: 400px;  /* slightly larger for real image */
+}
+
+.importance-risk-heading {
+  position: absolute;
+  top: 17%;
+  right: 27%;
+  max-width: 520px;
+  font-family: "komet-sc", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 114%;       /* ~51px */
+  text-align: center;
+  letter-spacing: -0.019em;
+  color: var(--cream);
+}
+
+.importance-risk-blurbs {
+  position: absolute;
+  top: 34%;              /* just below the heading */
+  right: 27.5%;             /* same anchor as heading → centers under it */
+  transform: translateX(0);
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  max-width: 500px;      /* match heading width */
+}
+
+.importance-risk-blurb {
+  flex: 1;
+  color: var(--cream);
+  font-family: "komet", sans-serif;
+  font-size: 20px;
   line-height: 1.3;
   text-align: center;
 }
+
+.importance-reliance-heading {
+  position: absolute;
+  top: 24%;          /* same vertical as risk heading */
+  right: 7%;       /* push further right than risk heading */
+  max-width: 520px;
+  font-family: "komet-sc", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 114%;
+  text-align: left;
+  letter-spacing: -0.019em;
+  color: var(--cream);
+}
+
+.importance-reliance-coral {
+  position: absolute;
+  top: 68%;       /* just under the reliance heading; tweak as needed */
+  right: 1%;     /* align roughly under the reliance heading (~right: 7%) */
+  transform: translateY(0);
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.importance-reliance-blurbs {
+  position: absolute;
+  top: 38%;          /* under this heading */
+  right: 7.5%;       /* match heading’s right */
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  max-width: 500px;
+}
+
+.importance-reliance-blurb {
+  flex: 1;
+  color: var(--cream);
+  font-family: "komet", sans-serif;
+  font-size: 20px;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.importance-reliance-fish-1 {
+  position: absolute;
+  top: 12%;          /* above the reliance heading (which is at 24%) */
+  right: -27%;         /* align with the reliance heading */
+  transform: translateX(50%) scaleX(-1);  /* horizontal flip */
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.importance-risk-cash {
+  position: absolute;
+  top: 58%;        /* vertical position under blurbs */
+  right: 30%;      /* move entire cluster left/right */
+  width: 340px;
+  height: 220px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.importance-cash {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  opacity: 0.9;
+}
+
+.importance-cash-1 {
+  top: 10px;         /* a bit lower */
+  left: 0px;         /* farther left */
+  transform: rotate(-8deg);
+}
+
+.importance-cash-2 {
+  top: 50px;         /* a bit lower */
+  left: 130px;       /* more to the right */
+  transform: rotate(12deg);
+}
+
+.importance-cash-3 {
+  top: 120px;        /* was 120px – move it higher */
+  left: 250px;      /* keep horizontal position */
+  transform: rotate(-15deg);
+}
+
+.importance-fish-hook {
+  position: absolute;
+  top: -3%;
+  left: 73%;
+  width: 350px;
+  height: auto;
+  object-fit: contain;
+  transform: rotate(10deg);  /* slight tilt to the right */
+}
+
+.importance-fish-two {
+  position: absolute;
+  top: 59%;       /* a bit below the hook; tweak as needed */
+  left: 82%;      /* roughly under the hook (hook is at ~73%) */
+  width: 160px;
+  height: auto;
+  object-fit: contain;
+  transform: rotate(-8deg);  /* slight tilt */
+  pointer-events: none;
+  z-index: 2;
+}
+
+#the-issue .issue-fish-4 {
+  position: absolute;
+  top: 22%;           /* aligned with the issue title */
+  left: 19%;          /* to the right of the title */
+  transform: translate(-50%, -50%) scaleX(-1);  /* flip horizontally */
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
 
 #influence {
     width: 110vw;
@@ -973,16 +1245,236 @@ body {
      #influence-title {
         position: absolute;
         top: 27%;
-        left: 50%;
+        left: 44%;
         transform: translate(-50%, -50%);
         color: var(--cream);
         text-align: center;
-        font-size: 150px;
+        font-size: 130px;
         font-family: "hey-eloise-watercolor", sans-serif;
         font-weight: 400;
         font-style: normal;
         line-height: 0.7;
+        max-width: 800px;
     }
+}
+
+#influence-text {
+  position: absolute;
+  top: 48%;             /* keep or tweak vertically */
+  left: 44%;            /* center horizontally in the section */
+  transform: translateX(-50%);
+  color: var(--cream);
+  font-size: 24px;
+  font-family: "komet", sans-serif;
+  font-weight: 400;
+  font-style: light;
+  line-height: 1.4;
+  max-width: 600px;
+  text-align: center;   /* center the text itself */
+}
+
+.influence-sun-container {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  width: 350px;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.influence-sun {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.influence-sun-label {
+  position: absolute;
+  top: 10%;
+  left: -10px;
+  transform: rotate(-20deg);
+  transform-origin: left bottom;
+  font-family: "komet-sc", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--cream);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Show label only when popup is NOT open */
+.influence-sun-container:not(.sun-open):hover .influence-sun-label {
+  opacity: 1;
+}
+
+.influence-sun-popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+  padding: 16px 20px;
+  width: 320px;
+  background-color: #F18D53;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        color: var(--cream);
+  font-family: "komet", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 5;
+}
+
+.influence-sun-popup h4 {
+  margin: 0 0 8px 0;
+  font-family: "komet-sc", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+.influence-sun-popup ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.6;
+}
+
+/* When sun is "open": hide sun, show popup */
+.influence-sun-container.sun-open .influence-sun {
+  opacity: 0;
+}
+
+.influence-sun-container.sun-open .influence-sun-popup {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.influence-diver-container {
+  position: absolute;
+  top: 19%;        /* aligned with title/text */
+  right: 12%;      /* right side */
+  width: 370px;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.influence-diver {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+/* Tilted label on the bottom-left of the diver */
+.influence-diver-label {
+  position: absolute;
+  top: 76%;
+  left: 55%;
+  transform: rotate(-28deg);
+  transform-origin: left top;
+  font-family: "komet-sc", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--cream);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Show label only when popup is NOT open */
+.influence-diver-container:not(.diver-open):hover .influence-diver-label {
+  opacity: 1;
+}
+
+/* Popup box centered over the diver */
+.influence-diver-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 16px 20px;
+  width: 320px;
+  background-color: #425FC3;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  color: var(--cream);
+  font-family: "komet", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 5;
+}
+
+.influence-diver-popup h4 {
+  margin: 0 0 8px 0;
+  font-family: "komet-sc", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+.influence-diver-popup ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.6;
+}
+
+/* When diver is "open": hide diver, show box */
+.influence-diver-container.diver-open .influence-diver {
+  opacity: 0;
+}
+
+.influence-diver-container.diver-open .influence-diver-popup {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.influence-crab {
+  position: absolute;
+  top: 76%;       /* a bit below the influence text; tweak as needed */
+  left: 60%;      /* same horizontal center as the text/title */
+  transform: translateX(-50%);
+  width: 160px;   /* adjust size as desired */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.influence-dead-coral-sun {
+  position: absolute;
+  top: 100%;          /* directly under the sun container */
+  left: 90%;
+  transform: translateX(-50%);
+  width: 160px;       /* adjust size as desired */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.influence-water-bottle {
+  position: absolute;
+  top: 70%;          /* below the scuba diver container (which is at 19%) */
+  right: 12%;        /* align with the scuba diver */
+  transform: translateX(50%);
+  width: 100px;      /* adjust size as desired */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
 }
 
 
@@ -995,8 +1487,8 @@ body {
 
      #taking-action-title {
         position: absolute;
-        top: 27%;
-        left: 50%;
+        top: 21%;
+        left: 25%;
         transform: translate(-50%, -50%);
         color: var(--cream);
         text-align: center;
@@ -1006,6 +1498,122 @@ body {
         font-style: normal;
         line-height: 0.7;
     }
+}
+
+#taking-action-text {
+  position: absolute;
+  top: 32%;          /* below the title */
+  left: 28%;         /* same left as the title (was 50%) */
+  transform: translateX(-50%);  /* keep centering transform to match title */
+  max-width: 600px;
+  color: var(--cream);
+  font-family: "komet", sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;  /* left-align the text itself */
+}
+
+.taking-action-book {
+  position: absolute;
+  top: 27%;          /* raised from 25% */
+  left: 61%;         /* to the left of the second blurb (which is at ~71%) */
+  transform: translateX(-50%);
+  width: 200px;      /* adjust size as desired */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.taking-action-fish-3 {
+  position: absolute;
+  top: 65%;          /* below the first blurb */
+  left: -67%;         /* align with the first blurb */
+  transform: translateX(-50%) scaleX(-1);  /* horizontal flip */
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.taking-action-big-seaweed {
+  position: absolute;
+  top: 70%;          /* same vertical as the fish */
+  left: 68%;         /* same horizontal as the fish */
+  transform: translate(-50%, -50%);
+  width: 250px;      /* adjust size as desired */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 1;        /* behind the fish (fish has z-index: 2) */
+}
+
+#taking-action-text-2 {
+  position: absolute;
+  top: 19%;         
+  left: 83%;    
+  transform: translateX(-50%);  /* keep centering transform to match title */
+  width: 450px;
+  color: var(--cream);
+  font-family: "komet", sans-serif;
+  font-size: 29px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;  /* left-align the text itself */
+}
+
+.taking-action-sign {
+  position: absolute;
+  top: 52%;          /* below the second blurb (which is at 16%) */
+  left: 107%;         /* align with the second blurb */
+  transform: translateX(-50%);
+  width: 300px;      /* adjust size as desired */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.taking-action-blue-coral {
+  position: absolute;
+  top: 62%;          /* below the book image (which is at 27%) */
+  left: 42%;         /* align with the book image */
+  transform: translateX(-50%);
+  width: 160px;      /* adjust size as desired */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.taking-action-small-seaweed {
+  position: absolute;
+  top: 80%;          /* same vertical as the blue coral */
+  left: 135%;        /* to the right of the blue coral (which is at 135%) */
+  transform: translateX(-50%);
+  width: 120px;      /* adjust size as desired */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.taking-action-sign-text {
+  position: absolute;
+  top: 65%;          /* same as the sign */
+  left: 107%;        /* same as the sign */
+  transform: translate(-50%, -50%);
+  color: var(--black);
+  font-family: "komet", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center;
+  z-index: 3;        /* above the sign */
+  pointer-events: none;
+  width: 200px;
 }
 
 /* Humuhumu container */
@@ -1073,25 +1681,3 @@ body {
   transform: translateY(0);
 }
 
-.importance-turtle-caption {
-  position: absolute;
-  top: 100%;               /* directly under the image */
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 10px;
-  max-width: 360px;
-  color: var(--cream);
-  font-family: "komet", sans-serif;
-  font-size: 16px;
-  line-height: 1.3;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* Show caption only when real image is active */
-.importance-turtle-container.turtle-clicked .importance-turtle-caption {
-  opacity: 1;
-}

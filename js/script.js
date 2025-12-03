@@ -47,7 +47,7 @@ scrollContainer.addEventListener('scroll', () => {
     
     // Landing midground matches repeating midground (0.8 speed) for seamless transition
     landingSection.style.setProperty('--landing-midground-offset', `${scrollLeft * 0.8}px`);
-    
+  
     // Sand-coral matches repeating sand (0.9 speed) for seamless transition
     landingSection.style.setProperty('--parallax-offset', `${scrollLeft * 0.9}px`);
   }
@@ -100,6 +100,13 @@ scrollContainer.addEventListener('scroll', () => {
   const redCoralHistory = document.querySelector('.red-coral-history-container');
   const deadCoralHistory = document.querySelector('.dead-coral-history-container');
   const hawaiiFlag = document.querySelector('.hawaii-flag-container');
+  const smallSeaweed = document.querySelector('.importance-small-seaweed'); // NEW
+  const importanceBigSeaweed = document.querySelector('.importance-big-seaweed'); // NEW
+  const issueFish4 = document.querySelector('.issue-fish-4'); // NEW
+  const takingActionFish3 = document.querySelector('.taking-action-fish-3'); // NEW
+  const takingActionBigSeaweed = document.querySelector('.taking-action-big-seaweed'); // NEW
+  const relianceFish1 = document.querySelector('.importance-reliance-fish-1'); // NEW
+  const takingActionSmallSeaweed = document.querySelector('.taking-action-small-seaweed'); // NEW
 
   if (redCoral) {
     redCoral.style.transform =
@@ -108,6 +115,11 @@ scrollContainer.addEventListener('scroll', () => {
 
   if (bigSeaweed) {
     bigSeaweed.style.transform =
+      `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
+  }
+
+  if (smallSeaweed) { // NEW
+    smallSeaweed.style.transform =
       `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
   }
 
@@ -131,6 +143,36 @@ scrollContainer.addEventListener('scroll', () => {
   // Hawaii flag moves with the same parallax
   if (hawaiiFlag) {
     hawaiiFlag.style.transform =
+      `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
+  }
+
+  if (importanceBigSeaweed) {
+    importanceBigSeaweed.style.transform =
+      `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
+  }
+
+  if (issueFish4) {
+    issueFish4.style.transform =
+      `translate(-50%, -50%) scaleX(-1) translateX(${scrollLeft * -0.1}px)`;
+  }
+
+  if (takingActionFish3) {
+    takingActionFish3.style.transform =
+      `translate(-50%, -50%) scaleX(-1) translateX(${scrollLeft * -0.1}px)`;
+  }
+
+  if (takingActionBigSeaweed) {
+    takingActionBigSeaweed.style.transform =
+      `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
+  }
+
+  if (relianceFish1) {
+    relianceFish1.style.transform =
+      `translateX(calc(50% + ${scrollLeft * -0.1}px)) scaleX(-1)`;
+  }
+
+  if (takingActionSmallSeaweed) {
+    takingActionSmallSeaweed.style.transform =
       `translate(-50%, -50%) translateX(${scrollLeft * -0.1}px)`;
   }
 
@@ -264,6 +306,64 @@ document.addEventListener('DOMContentLoaded', () => {
         turtleImg.src = realSrc;
         turtleContainer.classList.add('turtle-clicked');
       }
+    });
+  }
+
+  // Click to swap monk seal image and toggle hover text/caption
+  const monkContainer = document.querySelector('.importance-monk-seal-container');
+  const monkImg = document.querySelector('.importance-monk-seal');
+
+  if (monkContainer && monkImg) {
+    const monkOriginalSrc = 'assets/monk-seal.png';
+    const monkRealSrc = 'assets/monk-seal-real.png'; // make sure this file exists in assets/
+
+    monkContainer.addEventListener('click', () => {
+      if (monkImg.src.includes('monk-seal-real.png')) {
+        // Back to illustration, re-enable hover label, hide caption
+        monkImg.src = monkOriginalSrc;
+        monkContainer.classList.remove('monk-clicked');
+      } else {
+        // Show real photo, disable hover label, show caption
+        monkImg.src = monkRealSrc;
+        monkContainer.classList.add('monk-clicked');
+      }
+    });
+  }
+
+  // Click to swap hawksbill image and toggle hover text/caption
+  const hawksbillContainer = document.querySelector('.importance-hawksbill-container');
+  const hawksbillImg = document.querySelector('.importance-hawksbill');
+
+  if (hawksbillContainer && hawksbillImg) {
+    const hawksbillOriginalSrc = 'assets/hawksbill-sea-turtle.png';
+    const hawksbillRealSrc = 'assets/hawksbill-sea-turtle-real.png'; // make sure this exists
+
+    hawksbillContainer.addEventListener('click', () => {
+      if (hawksbillImg.src.includes('hawksbill-sea-turtle-real.png')) {
+        // Back to illustration, re-enable hover label, hide caption
+        hawksbillImg.src = hawksbillOriginalSrc;
+        hawksbillContainer.classList.remove('hawksbill-clicked');
+      } else {
+        // Show real photo, disable hover label, show caption
+        hawksbillImg.src = hawksbillRealSrc;
+        hawksbillContainer.classList.add('hawksbill-clicked');
+  }
+});
+  }
+
+  // Sun popup for environmental influences
+  const sunContainer = document.querySelector('.influence-sun-container');
+  if (sunContainer) {
+    sunContainer.addEventListener('click', () => {
+      sunContainer.classList.toggle('sun-open');
+    });
+  }
+
+  // Diver popup for human influences
+  const diverContainer = document.querySelector('.influence-diver-container');
+  if (diverContainer) {
+    diverContainer.addEventListener('click', () => {
+      diverContainer.classList.toggle('diver-open');
     });
   }
 });
