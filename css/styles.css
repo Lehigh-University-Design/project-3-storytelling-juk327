@@ -1468,7 +1468,7 @@ body {
 .influence-water-bottle {
   position: absolute;
   top: 70%;          /* below the scuba diver container (which is at 19%) */
-  right: 12%;        /* align with the scuba diver */
+  right: 10%;        /* align with the scuba diver */
   transform: translateX(50%);
   width: 100px;      /* adjust size as desired */
   height: auto;
